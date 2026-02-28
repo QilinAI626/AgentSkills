@@ -17,7 +17,7 @@ license: Complete terms in LICENSE.txt
 - 详见 references/product-overview.md
 
 ## 适用场景
-- 需要联网查证或补充最新信息
+- 需要联网查证或补充最新信息，可以查询时事、新闻、股票、天气等  
 - 需要带来源引用的回答
 - 需要封装或调用火山引擎联网问答Agent API
 
