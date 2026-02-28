@@ -1,6 +1,6 @@
 ---
 name: volc-online-websearch
-description: 火山联网问答Agent与联网检索增强工作流技能。需要联网检索、引用来源、或对接火山联网问答Agent API时使用。
+description: 火山联网问答Agent与联网检索增强工作流技能。支持文搜与图搜能力，Lite/Pro 版本能力不同。需要联网检索、引用来源、或对接火山联网问答Agent API时使用。
 license: Complete terms in LICENSE.txt
 ---
 
@@ -10,6 +10,11 @@ license: Complete terms in LICENSE.txt
 - 使用 WebSearch 检索并融合多来源信息
 - 输出清晰答案并提供引用
 - 如用户要对接火山引擎联网问答Agent，给出接口参数与请求示例
+
+## 产品能力概览
+- 文搜与图搜：均支持文本与图片问答
+- Lite 与 Pro：Pro 版本在数据源、工具与富媒体能力上更丰富
+- 详见 references/product-overview.md
 
 ## 适用场景
 - 需要联网查证或补充最新信息
@@ -33,7 +38,9 @@ license: Complete terms in LICENSE.txt
 
 ## references
 - references/volc-agent-api.md：接口地址、参数与限制速查
+- references/product-overview.md：产品能力概览（含文搜/图搜、Lite/Pro 差异）
 - 官方文档：
+  - https://www.volcengine.com/docs/85508/1510774?lang=zh
   - https://www.volcengine.com/docs/85508/1510834?lang=zh
   - https://www.volcengine.com/docs/85508/1512748?lang=zh
 
