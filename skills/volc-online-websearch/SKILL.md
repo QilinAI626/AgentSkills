@@ -1,10 +1,10 @@
 ---
-name: online-qa-websearch
-description: 面向联网问答与搜索增强场景的工作流技能。用户需要联网检索、引用来源、生成带证据的回答，或需要对接火山引擎联网问答Agent API时，都应使用此技能。
+name: volc-online-websearch
+description: 火山联网问答Agent与联网检索增强工作流技能。需要联网检索、引用来源、或对接火山联网问答Agent API时使用。
 license: Complete terms in LICENSE.txt
 ---
 
-# 联网问答 WebSearch Skill
+# 火山联网问答 WebSearch Skill
 
 ## 目标
 - 使用 WebSearch 检索并融合多来源信息
@@ -23,6 +23,20 @@ license: Complete terms in LICENSE.txt
 4. 对比不同来源，提取可核验事实
 5. 输出答案与引用，并标注信息来源
 
+## scripts
+- scripts/volc_agent_chat.py
+  - 用途：以 APIKey 方式调用火山引擎联网问答Agent
+  - 依赖：Python 标准库，无需额外依赖
+  - 用法：
+    - export VOLC_AGENT_API_KEY=你的APIKey
+    - python scripts/volc_agent_chat.py <bot_id> <user_message> [system_message] [stream] [model]
+
+## references
+- references/volc-agent-api.md：接口地址、参数与限制速查
+- 官方文档：
+  - https://www.volcengine.com/docs/85508/1510834?lang=zh
+  - https://www.volcengine.com/docs/85508/1512748?lang=zh
+
 ## 输出结构
 始终使用以下结构：
 - 答案
@@ -30,30 +44,7 @@ license: Complete terms in LICENSE.txt
 - 如涉及 API 集成：请求说明与示例
 
 ## 火山引擎 联网问答Agent API 关键说明
-以下信息用于用户集成或封装服务时输出：
-
-- 认证方式
-  - APIKey 接入：Header 中使用 Authorization: Bearer <API_KEY>
-  - TOP 网关接入：使用火山引擎标准 AK/SK 签名，ServiceName=volc_torchlight_api
-- 接口地址
-  - APIKey 接入：https://open.feedcoopapi.com/agent_api/agent/chat/completion
-  - TOP 网关接入：https://mercury.volcengineapi.com?Action=ChatCompletion&Version=2024-01-01
-- 请求方法与格式
-  - Method: POST
-  - Content-Type: application/json
-- 关键请求参数
-  - bot_id：必填，智能体 ID
-  - messages：必填，对话消息数组，最多保留最后 10 条
-    - 如第一条为 system，始终保留
-    - role: user / assistant / system
-    - content: 文本或多模态对象
-  - stream：是否流式，默认 false，建议流式
-  - user_id、device_id：可选
-  - knowledge：可选背景知识注入
-  - model：可选，thinking 或 auto_thinking
-- 限制
-  - APIKey 接入超时 30s
-  - TOP 网关请求体不超过 8MB，超时 30s
+- 详见 references/volc-agent-api.md
 
 ## 示例
 ### WebSearch 答复示例
@@ -77,6 +68,12 @@ curl -X POST "https://open.feedcoopapi.com/agent_api/agent/chat/completion" \
     ],
     "stream": true
   }'
+```
+
+### scripts 调用示例
+```bash
+export VOLC_AGENT_API_KEY="你的APIKey"
+python scripts/volc_agent_chat.py "YOUR_BOT_ID" "你好" "你是一个联网问答助手" true
 ```
 
 ## 安全与合规
